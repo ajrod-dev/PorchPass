@@ -14,15 +14,23 @@ import { defineConfig, devices } from '@playwright/test';
 export default defineConfig({
   testDir: 'src/tests',
   /* Run tests in files in parallel */
-  fullyParallel: true,
+  fullyParallel: false,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
   /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
+  workers: 1,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
+  // Order of tests to run
+  testMatch: [
+    // Tests will run in this order:
+    'src/tests/baseNavigation.spec.ts',
+    'src/tests/allModels.spec.ts',
+    'src/tests/oneModel.spec.ts',
+    // Add any future test files in the order you want them to run
+  ],
   
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
@@ -30,8 +38,9 @@ export default defineConfig({
     // baseURL: 'http://127.0.0.1:3000',
     baseURL: 'https://www.braustin.com',
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on-first-retry',
+    trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
+    navigationTimeout: 30000,
   },
 
   /* Configure projects for major browsers */
@@ -41,7 +50,7 @@ export default defineConfig({
       use: { 
         ...devices['Desktop Chrome'],
         launchOptions: {
-          slowMo: 500
+          slowMo: 250
         }
       },
     },
