@@ -5,16 +5,34 @@ export class BasePage {
     readonly searchButton: Locator;
     readonly searchInput: Locator;
     readonly header: {
+        // Home
         homeButton: Locator;
+        allModels: Locator;
+        inStock: Locator;
+        onLand: Locator;
+        onSale: Locator;
+        saved: Locator
+        // About
         aboutButton: Locator;
+        braustinStory: Locator;
+        customerStories: Locator;
+        locations: Locator;
+        // Learn
         learnButton: Locator;
+        blog: Locator;
+        academy: Locator;
+        podcast: Locator;
+        faqs: Locator;
+        braustinScholars: Locator;
+        // Contact Us
         contactUsButton: Locator;
         commercialAccountsButton: Locator;
         skirtingButton: Locator;
         phoneNumButton: Locator;
         searchButton: Locator;
         searchInput: Locator;
-        allModels: Locator;
+        
+        
     };
 
     constructor(page: Page) {
@@ -30,7 +48,22 @@ export class BasePage {
             searchButton: this.page.getByRole('button', { name: 'Search' }),
             searchInput: this.page.locator('input[type="search"]').nth(1),
             // Homes Button Options
-            allModels: this.page.getByRole('button', { name: 'All Models' }).nth(0),
+            // allModels: this.page.getByRole('button', { name: 'All Models' }).nth(0),
+            allModels: this.page.getByLabel('All Models', { exact: true }),
+            inStock: this.page.getByRole('button', { name: 'In Stock' }),
+            onLand: this.page.getByRole('button', { name: 'On Land' }),
+            onSale: this.page.getByRole('button', { name: 'On Sale' }),
+            saved: this.page.getByRole('button', { name: 'Saved' }),
+            // About Button Options
+            braustinStory: this.page.getByRole('button', { name: 'Braustin Story' }),
+            customerStories: this.page.getByRole('button', { name: 'Customer Stories' }),
+            locations: this.page.getByRole('button', { name: 'Locations' }),
+            // Learn Button Options
+            blog: this.page.getByRole('button', { name: 'Blog' }),
+            academy: this.page.getByRole('button', { name: 'Academy' }),
+            podcast: this.page.getByRole('button', { name: 'Podcast' }),
+            faqs: this.page.getByRole('button', { name: 'FAQs' }),
+            braustinScholars: this.page.getByRole('button', { name: 'Braustin Scholars' })
         };
         
     }
