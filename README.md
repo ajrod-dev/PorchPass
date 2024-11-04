@@ -151,3 +151,33 @@ To view test results:
 1. Go to the GitHub Actions tab
 2. Select the latest workflow run
 3. Download the artifacts from the "Artifacts" section
+
+## Implementation Notes
+
+### Assumptions
+- Tests require consistent timing/waiting for elements to be ready
+- Navigation menu items are always present in header
+- Page transitions complete within reasonable timeout periods
+- Network conditions are stable enough for page loads
+- Browser viewport is large enough to display full navigation menu
+
+### Challenges and Solutions
+- Dropdown menu interactions
+  - Added hover actions before clicks
+  - Implemented proper waiting for menu visibility
+  - Used stable locators for menu items
+
+- Page rendering issues
+  - Added explicit waits for page load states
+  - Verified URL changes after navigation
+  - Implemented retry mechanism for flaky tests
+
+- Timing and synchronization 
+  - Used waitForLoadState to handle page transitions
+  - Added appropriate timeouts for element visibility
+  - Implemented proper element waiting strategies
+
+- Environment performance
+  - Added retry attempts for CI environment
+  - Configured reasonable timeouts
+  - Implemented slow motion for visual debugging
