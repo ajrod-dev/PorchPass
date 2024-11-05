@@ -48,7 +48,9 @@ test.describe('Single Model Page Tests', () => {
         await expect(oneModelPage.modelName).toBeVisible();
         // Verify URL
         const modelName = await oneModelPage.modelName.innerText();
-        await expect(page).toHaveURL(`/shop/${modelName.toLowerCase().replace(/\s+/g, '-')}`);
+        const currentUrl = page.url();
+        // Only check if the base URL contains the model name, ignoring query parameters
+        await expect(currentUrl).toContain(`/shop/${modelName.toLowerCase().replace(/\s+/g, '-')}`);
     });
 
     test('As a user, I can adjust the credit score', async ({ oneModelsPage }) => {
